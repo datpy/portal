@@ -1,0 +1,11 @@
+.divider {
+  @apply min-h-full w-0.5 border-solid border-gray-500 bg-gray-500
+         flex flex-col justify-center;
+  border-width: 1px;
+}
+
+.divider-indicator {
+  @apply w-2 h-8 bg-white rounded-md border-2 border-solid
+       border-gray-200 flex flex-col justify-center;
+  margin-left: -4px;
+}
