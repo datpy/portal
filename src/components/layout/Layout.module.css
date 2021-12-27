@@ -1,0 +1,9 @@
+.layout {
+  @apply flex flex-col;
+  min-height: 100vh;
+}
+
+.main-navigation {
+  @apply flex-grow-0 flex-shrink;
+  height: 7vh;
+}

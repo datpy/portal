@@ -1,12 +1,13 @@
 import React from "react";
 
-import classes from "./ResizablePanel.module.scss";
+import classes from "./ResizablePanel.module.css";
 
 const MIN_WIDTH = 50;
 
 interface ResizeablePanelProps {
   left: React.ReactElement;
   right: React.ReactElement;
+  className?: string;
 };
 
 interface LeftPaneProps {
@@ -15,22 +16,24 @@ interface LeftPaneProps {
   className?: string;
 };
 
-const LeftPane : React.FunctionComponent<LeftPaneProps> = (props) => {
+const LeftPane: React.FunctionComponent<LeftPaneProps> =
+  ({setLeftWidth, leftWidth, className, children}) => {
+
   const leftRef = React.createRef<HTMLDivElement>();
 
   React.useEffect(() => {
     if (leftRef.current) {
       // If width is not yet define, set it to current width.
-      if (!props.leftWidth) {
-        props.setLeftWidth(leftRef.current?.clientWidth);
+      if (!leftWidth) {
+        setLeftWidth(leftRef.current?.clientWidth);
         return;
       }
 
-      leftRef.current.style.width = `${props.leftWidth}px`;
+      leftRef.current.style.width = `${leftWidth}px`;
     }
-  }, [leftRef, props.leftWidth, props.setLeftWidth]);
+  }, [leftRef, leftWidth, setLeftWidth]);
 
-  return <div className={props.className} ref={leftRef}>{props.children}</div>;
+  return <div className={className} ref={leftRef}>{children}</div>;
 };
 
 const ResizablePanel : React.FunctionComponent<ResizeablePanelProps> = (props) => {
@@ -97,7 +100,7 @@ const ResizablePanel : React.FunctionComponent<ResizeablePanelProps> = (props) =
   });
 
   return (
-    <div ref={resizablePaneRef} className="flex flex-row item-start h-full">
+    <div ref={resizablePaneRef} className={`${props.className} flex flex-row`}>
       <LeftPane
         leftWidth={leftWidth}
         setLeftWidth={setLeftWidth}
